@@ -35,6 +35,7 @@ interface BookParams {
   totalCopies: number;
   videoUrl: string;
   summary: string;
+  pdfUrl?: string; 
 }
 // type BookParams = Omit<Book, "id", "isLoanedBook", "availableCopies">;
 

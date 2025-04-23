@@ -28,4 +28,5 @@ export const bookSchema = z.object({
   videoUrl: z.string().nonempty(),
 
   summary: z.string().trim().min(10).max(1000),
+  pdfUrl: z.string().nonempty(),
 });

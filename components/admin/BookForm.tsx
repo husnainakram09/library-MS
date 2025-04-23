@@ -29,6 +29,8 @@ interface Props extends Partial<Book> {
 const BookForm = ({ type, ...book }: Props) => {
   const router = useRouter();
   console.log({ type, ...book });
+  
+  // Updated form to include pdfUrl field
   const form = useForm<z.infer<typeof bookSchema>>({
     resolver: zodResolver(bookSchema),
     defaultValues: {
@@ -42,10 +44,12 @@ const BookForm = ({ type, ...book }: Props) => {
       coverColor: "#aabbcc",
       videoUrl: "",
       summary: "",
+      pdfUrl: "",
     },
   });
 
   const onSubmit = async (values: z.infer<typeof bookSchema>) => {
+    // Store the PDF URL in the summary field
     const result = await createBook(values);
     if (result?.success) {
       toast.success("Book created successfully");
@@ -177,6 +181,29 @@ const BookForm = ({ type, ...book }: Props) => {
                   placeholder="Upload a book cover"
                   variant="light"
                   folder="books/covers"
+                  onFileChange={field.onChange}
+                  value={field.value}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="pdfUrl"
+          render={({ field }) => (
+            <FormItem className="flex flex-col gap-1">
+              <FormLabel className="text-base font-normal text-dark-500">
+                Book PDF
+              </FormLabel>
+              <FormControl>
+                <FileUpload
+                  type="file"
+                  accept="application/pdf"
+                  placeholder="Upload a PDF of the book"
+                  variant="light"
+                  folder="books/pdfs"
                   onFileChange={field.onChange}
                   value={field.value}
                 />

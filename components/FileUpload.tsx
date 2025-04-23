@@ -32,7 +32,7 @@ const authenticator = async () => {
 };
 
 interface Props {
-  type: "image" | "video";
+  type: "image" | "video" | "file";
   accept: string;
   placeholder: string;
   folder: string;

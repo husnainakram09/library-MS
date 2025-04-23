@@ -15,6 +15,7 @@ CREATE TABLE "books" (
 	"video_url" text NOT NULL,
 	"created_at" timestamp with time zone DEFAULT now(),
 	"summary" varchar NOT NULL,
+	"pdfUrl" text NOT NULL,
 	CONSTRAINT "books_id_unique" UNIQUE("id")
 );
 --> statement-breakpoint
