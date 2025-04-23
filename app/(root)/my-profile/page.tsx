@@ -9,7 +9,6 @@ const page = async () => {
   const session = await auth();
 
   if (!session?.user?.id) return null;
-
   const borrowedBooks = await db
     .select({
       id: books.id,
@@ -31,7 +30,7 @@ const page = async () => {
     .from(borrowRecords)
     .where(eq(borrowRecords.userId, session?.user?.id as string))
     .innerJoin(books, eq(borrowRecords.bookId, books.id));
-
+    
   return (
     <BookList
       title="Borrowed Books"
